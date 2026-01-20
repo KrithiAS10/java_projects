@@ -1,15 +1,11 @@
 
 import javax.swing.JOptionPane;
 
-public class BankAcc extends ATM {
+public class BankAcc {
 
-    private double balance;
+    private double balance = 1000.0;
 
-    public BankAcc() {
-        this.balance = 1000.0;
-    }
-
-    public double Withdraw(double w) {
+    public double withdraw(double w) {
         if (w <= 0) {
             JOptionPane.showMessageDialog(null, "Enter a positive amount");
         } else if (w > balance) {
@@ -20,7 +16,7 @@ public class BankAcc extends ATM {
         return balance;
     }
 
-    public double Deposite(double d) {
+    public double deposit(double d) {
         if (d < 0) {
             JOptionPane.showMessageDialog(null, "Enter a positive amount");
         } else {
@@ -29,7 +25,7 @@ public class BankAcc extends ATM {
         return balance;
     }
 
-    public double CheckBalance() {
+    public double checkBalance() {
         return balance;
     }
 }
