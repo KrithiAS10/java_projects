@@ -46,5 +46,6 @@ public class Task4 {
         amount = sc.nextDouble();
         double convertedAmount = amount * rate;
         System.out.println("Converted Amount: " + convertedAmount);
+        System.out.println("Thank you");
     }
 }
