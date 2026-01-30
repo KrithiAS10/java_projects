@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
 public class ATM {
 
     private static JFrame frame;
-    // public double balance = 1000.0;
-    BankAcc B1 = new BankAcc();
+    private double balance = 1000.0;
+    private static ATM a1;
 
     public static void main(String[] args) {
         // String name = JOptionPane.showConfirmDialog(null, "Withdraw");
-        ATM a1 = new ATM();
+        a1 = new ATM();
         a1.MyFrame();
     }
 
@@ -31,23 +31,23 @@ public class ATM {
         withdrawBtn.setBounds(450, 500, 100, 50);
         withdrawBtn.setText("Withdraw");
         depositeBtn.setBounds(700, 500, 100, 50);
-        depositeBtn.setText("deposit");
+        depositeBtn.setText("Deposit");
         checkBalBtn.setBounds(950, 500, 150, 50);
-        checkBalBtn.setText("checkBalance");
+        checkBalBtn.setText("Check Balance");
         // button4.setBounds(1000, 500, 100, 50);
         // button4.setText("Withdraw");
         withdrawBtn.addActionListener(e -> {
             double amtWithdraw = Double.parseDouble(JOptionPane.showInputDialog("Enter the amount to withdraw"));
             // double updatedAmt = B1.Withdraw(amtWithdraw);
-            JOptionPane.showMessageDialog(frame, "Updated Balance after Withdraw:" + B1.Withdraw(amtWithdraw));
+            JOptionPane.showMessageDialog(frame, "Updated Balance after Withdraw:" + a1.withdraw(amtWithdraw));
         });
         depositeBtn.addActionListener(e -> {
             double amtdeposite = Double.parseDouble(JOptionPane.showInputDialog("Enter the amount to deposite"));
             // double updatedAmt = B1.Deposite(amtdeposite);
-            JOptionPane.showMessageDialog(frame, "Updated Balance after Deposite:" + B1.Deposite(amtdeposite));
+            JOptionPane.showMessageDialog(frame, "Updated Balance after Deposite:" + a1.deposit(amtdeposite));
         });
         checkBalBtn.addActionListener(e -> {
-            double updatedAmt = B1.CheckBalance();
+            double updatedAmt = a1.checkBalance();
             JOptionPane.showMessageDialog(frame, "Total Balance:" + updatedAmt);
         });
         // withdrawBtn.setIcon(icon);
@@ -81,16 +81,27 @@ public class ATM {
         // frame.getContentPane().setBackground(new Color(123, 150, 450));
     }
 
-    // public double Withdraw(double w) {
-    //     return ((double) (totalBalance -= w));
-    // }
-    // public double Deposite(double d) {
-    //     return ((double) (totalBalance += d));
-    // }
-    // public double CheckBalance() {
-    //     return totalBalance;
-    // }
-    // public ATM() {
-    //     B1.BankAcc();
-    // }
+    public double withdraw(double w) {
+        if (w <= 0) {
+            JOptionPane.showMessageDialog(null, "Enter a positive amount");
+        } else if (w > balance) {
+            JOptionPane.showMessageDialog(null, "Insufficient funds.");
+        } else {
+            balance -= w;
+        }
+        return balance;
+    }
+
+    public double deposit(double d) {
+        if (d < 0) {
+            JOptionPane.showMessageDialog(null, "Enter a positive amount");
+        } else {
+            balance += d;
+        }
+        return balance;
+    }
+
+    public double checkBalance() {
+        return balance;
+    }
 }
